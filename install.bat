@@ -1,11 +1,14 @@
 @echo off
 
 set domain=http://7xlxpn.dl1.z0.glb.clouddn.com
-
+set fperoot=%cd%
 set start_menu_dir="%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\local\"
 IF NOT EXIST %start_menu_dir% MD %start_menu_dir%
 
+setx FPE_ROOT %fperoot%
+
 :menu
+cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
@@ -22,8 +25,9 @@ echo xsf. Install XShell XFtp
 echo is. Install ILSpy
 echo 3c. Install 360Chrome
 echo .........................................
-echo jdk. Install Java SDK
-echo qt. Install Qt
+echo jdk. Install Java SDK [1.7.0_80]
+echo qt. Install Qt [5.5]
+echo ut. Install Unity [5.2.0]
 echo -----------------------------------------
 set idx="0"
 set /p idx=Enter the index:
@@ -40,6 +44,7 @@ if "%idx%"=="xsf" goto XshellXftp
 if "%idx%"=="3c" goto 360Chrome
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="qt" goto Qt
+if "%idx%"=="ut" goto Unity
 goto menu
 
 :Vim
@@ -158,19 +163,45 @@ call :decompress_installer %app%
 call :install_app %app%
 goto menu
 
+:Unity
+set app=Unity
+set exe=Unity\Editor\Unity.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+call :download_patcher %app%
+call :decompress_patcher %app%
+call :patch_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+
 :download_app
+cd %fperoot%
 echo ### download app ...
 set _app=%1
 curl -O %domain%/%_app%.7z
 goto :eof
 
 :download_installer
+cd %fperoot%
 echo ### download installer ...
 set _app=%1
 curl -O %domain%/%_app%_installer.7z
 goto :eof
 
+:download_patcher
+cd %fperoot%
+echo ### download patcher ...
+set _app=%1
+curl -O %domain%/%_app%_patcher.7z
+goto :eof
+
 :decompress_app
+cd %fperoot%
 echo ### decompress app ...
 set _app=%1
 rd /Q/S %_app%
@@ -179,17 +210,26 @@ del %_app%.7z
 goto :eof
 
 :decompress_installer
+cd %fperoot%
 echo ### decompress installer ...
 set _app=%1
 7za x %_app%_installer.7z
 del %_app%_installer.7z
 goto :eof
 
+:decompress_patcher
+cd %fperoot%
+echo ### decompress patcher ...
+set _app=%1
+7za x %_app%_patcher.7z
+del %_app%_patcher.7z
+goto :eof
+
 :joinstartmenu
 set _app=%1
 set _exe=%2
 set _icon=%3
-set shortcut="%cd%\%_app%.url"
+set shortcut="%fperoot%\%_app%.url"
 echo [InternetShortcut]>%shortcut%
 echo URL="%cd%\%_exe%">>%shortcut%
 echo IconFile=%cd%\%_icon%>>%shortcut%
@@ -198,9 +238,15 @@ move /Y %shortcut% %start_menu_dir%
 goto :eof
 
 :install_app
+cd %fperoot%
 set _app=%1
-set curpath=%cd%
 cd %_app%
 call ./install.bat
-cd %curpath%
+goto :eof
+
+:patch_app
+cd %fperoot%
+set _app=%1
+cd %_app%
+call ./patch.bat
 goto :eof
