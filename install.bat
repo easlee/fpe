@@ -26,6 +26,7 @@ echo is. Install ILSpy
 echo 3c. Install 360Chrome
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
+echo adk. Install Android SDK
 echo qt. Install Qt [5.5]
 echo ut. Install Unity [5.2.0]
 echo -----------------------------------------
@@ -43,6 +44,7 @@ if "%idx%"=="tp" goto TexturePacker
 if "%idx%"=="xsf" goto XshellXftp
 if "%idx%"=="3c" goto 360Chrome
 if "%idx%"=="jdk" goto JavaSDK
+if "%idx%"=="adk" goto AndroidSDK
 if "%idx%"=="qt" goto Qt
 if "%idx%"=="ut" goto Unity
 goto menu
@@ -147,6 +149,15 @@ goto menu
 
 :JavaSDK
 set app=jdk
+call :download_app %app%
+call :decompress_app %app%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+goto menu
+
+:AndroidSDK
+set app=android-sdk
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
