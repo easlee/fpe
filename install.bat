@@ -14,6 +14,7 @@ echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
 echo -----------------------------------------
 echo vi. Install Vim
+echo vc. Install VS Code
 echo ms. Install msys
 echo tc. Install Totalcmd
 echo st. Install SourceTree
@@ -24,6 +25,7 @@ echo tp. Install TexturePacker
 echo xsf. Install XShell XFtp
 echo is. Install ILSpy
 echo 3c. Install 360Chrome
+echo wo. Install WPS Office
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
@@ -33,6 +35,7 @@ echo -----------------------------------------
 set idx="0"
 set /p idx=Enter the index:
 if "%idx%"=="vi" goto Vim
+if "%idx%"=="vc" goto VSCode
 if "%idx%"=="ms" goto msys
 if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
@@ -43,6 +46,7 @@ if "%idx%"=="pg" goto PngGauntlet
 if "%idx%"=="tp" goto TexturePacker
 if "%idx%"=="xsf" goto XshellXftp
 if "%idx%"=="3c" goto 360Chrome
+if "%idx%"=="wo" goto WPSOffice
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="adk" goto AndroidSDK
 if "%idx%"=="qt" goto Qt
@@ -52,6 +56,15 @@ goto menu
 :Vim
 set app=Vim
 set exe=Vim\vim74\gvim.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:VSCode
+set app=VSCode
+set exe=VSCode\code.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
@@ -145,6 +158,15 @@ set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
 call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:WPSOffice
+set app=WPSOffice
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu WPSWord WPSOffice\9.1.0.5113\office6\wps.exe WPSOffice\9.1.0.5113\office6\wps.exe
+call :joinstartmenu WPSPPT WPSOffice\9.1.0.5113\office6\wpp.exe WPSOffice\9.1.0.5113\office6\wpp.exe
+call :joinstartmenu WPSExcel WPSOffice\9.1.0.5113\office6\et.exe WPSOffice\9.1.0.5113\office6\et.exe
 goto menu
 
 :JavaSDK
