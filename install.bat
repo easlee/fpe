@@ -16,6 +16,7 @@ echo -----------------------------------------
 echo vi. Install Vim
 echo vc. Install VS Code
 echo ms. Install msys
+echo ms2. Install msys2
 echo tc. Install Totalcmd
 echo st. Install SourceTree
 echo ss. Install Shadowsocks
@@ -26,6 +27,10 @@ echo xsf. Install XShell XFtp
 echo is. Install ILSpy
 echo 3c. Install 360Chrome
 echo wo. Install WPS Office
+echo ps. Install Photoshop [CC]
+echo gv. Install GoldWave [6.21]
+echo xm. Install XMind [7u1]
+echo td. Install Thunder [1.0.33.358]
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
@@ -37,6 +42,7 @@ set /p idx=Enter the index:
 if "%idx%"=="vi" goto Vim
 if "%idx%"=="vc" goto VSCode
 if "%idx%"=="ms" goto msys
+if "%idx%"=="ms2" goto msys2
 if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
 if "%idx%"=="ss" goto Shadowsocks
@@ -47,6 +53,10 @@ if "%idx%"=="tp" goto TexturePacker
 if "%idx%"=="xsf" goto XshellXftp
 if "%idx%"=="3c" goto 360Chrome
 if "%idx%"=="wo" goto WPSOffice
+if "%idx%"=="ps" goto Photoshop
+if "%idx%"=="gv" goto GoldWave
+if "%idx%"=="xm" goto XMind
+if "%idx%"=="td" goto Thunder
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="adk" goto AndroidSDK
 if "%idx%"=="qt" goto Qt
@@ -75,6 +85,15 @@ goto menu
 set app=msys
 set exe=msys\msys.bat
 set icon=msys\msys.ico
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:msys2
+set app=msys2
+set exe=msys2\msys2_shell.bat
+set icon=msys2\msys2.ico
 call :download_app %app%
 call :decompress_app %app%
 call :joinstartmenu %app% %exe% %icon%
@@ -167,6 +186,45 @@ call :decompress_app %app%
 call :joinstartmenu WPSWord WPSOffice\9.1.0.5113\office6\wps.exe WPSOffice\9.1.0.5113\office6\wps.exe
 call :joinstartmenu WPSPPT WPSOffice\9.1.0.5113\office6\wpp.exe WPSOffice\9.1.0.5113\office6\wpp.exe
 call :joinstartmenu WPSExcel WPSOffice\9.1.0.5113\office6\et.exe WPSOffice\9.1.0.5113\office6\et.exe
+goto menu
+
+:Photoshop
+set app=Photoshop
+set exe=Photoshop\Photoshop\Photoshop.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:GoldWave
+set app=GoldWave
+set exe=GoldWave\GoldWave.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:XMind
+set app=XMind
+set exe=XMind\XMind.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:Thunder
+set app=Thunder
+set exe=Thunder\Program\Thunder.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
 goto menu
 
 :JavaSDK
