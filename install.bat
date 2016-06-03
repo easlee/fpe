@@ -2,7 +2,7 @@
 
 set domain=http://7xlxpn.dl1.z0.glb.clouddn.com
 set fperoot=%cd%
-set start_menu_dir="%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\local\"
+set start_menu_dir="%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\fpe"
 IF NOT EXIST %start_menu_dir% MD %start_menu_dir%
 
 setx FPE_ROOT %fperoot%
@@ -12,30 +12,36 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
+echo ----         version  1.0.2          ----
 echo -----------------------------------------
-echo vi. Install Vim
-echo vc. Install VS Code
+echo vi. Install Vim [7.4.788]
+echo vc. Install VS Code [1.1]
 echo ms. Install msys
 echo ms2. Install msys2
-echo tc. Install Totalcmd
+echo tc. Install Totalcmd [8.51a]
 echo st. Install SourceTree
 echo ss. Install Shadowsocks
-echo nc. Install Navicat
+echo nc. Install Navicat [9.1.11]
 echo pg. Install PngGauntlet
 echo tp. Install TexturePacker
-echo xsf. Install XShell XFtp
-echo is. Install ILSpy
+echo xsf. Install XShell XFtp [5.0]
+echo is. Install ILSpy 
 echo 3c. Install 360Chrome
 echo wo. Install WPS Office
 echo ps. Install Photoshop [CC]
 echo gv. Install GoldWave [6.21]
 echo xm. Install XMind [7u1]
+echo ax. Install Axure [8.0.0.3297]
 echo td. Install Thunder [1.0.33.358]
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
 echo qt. Install Qt [5.5]
+echo nj. Install NodeJS [4.4.3]
 echo ut. Install Unity [5.2.0]
+echo cc. Install Cocos [3.10]
+echo .........................................
+echo update. Update the FPE
 echo -----------------------------------------
 set idx="0"
 set /p idx=Enter the index:
@@ -56,11 +62,16 @@ if "%idx%"=="wo" goto WPSOffice
 if "%idx%"=="ps" goto Photoshop
 if "%idx%"=="gv" goto GoldWave
 if "%idx%"=="xm" goto XMind
+if "%idx%"=="ax" goto Axure
 if "%idx%"=="td" goto Thunder
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="adk" goto AndroidSDK
 if "%idx%"=="qt" goto Qt
 if "%idx%"=="ut" goto Unity
+if "%idx%"=="ut" goto Unity
+if "%idx%"=="cc" goto Cocos
+if "%idx%"=="nj" goto NodeJS
+if "%idx%"=="update" goto Update
 goto menu
 
 :Vim
@@ -218,6 +229,15 @@ call :decompress_app %app%
 call :joinstartmenu %app% %exe% %icon%
 goto menu
 
+:Axure
+set app=Axure
+set exe=Axure\AxureRP8.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
 :Thunder
 set app=Thunder
 set exe=Thunder\Program\Thunder.exe
@@ -254,6 +274,12 @@ call :decompress_installer %app%
 call :install_app %app%
 goto menu
 
+:Cocos
+set app=Cocos
+call :download_app %app%
+call :decompress_app %app%
+goto menu
+
 :Unity
 set app=Unity
 set exe=Unity\Editor\Unity.exe
@@ -267,6 +293,21 @@ call :download_patcher %app%
 call :decompress_patcher %app%
 call :patch_app %app%
 call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:NodeJS
+set app=nodejs
+set exe=nodejs\node.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:Update
+set app=fpe
+call :download_app %app%
+call :decompress_app %app%
 goto menu
 
 
@@ -296,7 +337,7 @@ cd %fperoot%
 echo ### decompress app ...
 set _app=%1
 rd /Q/S %_app%
-7za x %_app%.7z
+7za -y x %_app%.7z
 del %_app%.7z
 goto :eof
 
@@ -304,7 +345,7 @@ goto :eof
 cd %fperoot%
 echo ### decompress installer ...
 set _app=%1
-7za x %_app%_installer.7z
+7za -y x %_app%_installer.7z
 del %_app%_installer.7z
 goto :eof
 
@@ -312,7 +353,7 @@ goto :eof
 cd %fperoot%
 echo ### decompress patcher ...
 set _app=%1
-7za x %_app%_patcher.7z
+7za -y x %_app%_patcher.7z
 del %_app%_patcher.7z
 goto :eof
 
