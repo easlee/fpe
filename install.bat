@@ -12,14 +12,14 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.3          ----
+echo ----         version  1.0.4          ----
 echo -----------------------------------------
 echo vi. Install Vim [7.4.788]
 echo vc. Install VS Code [1.1]
 echo ms. Install msys
 echo ms2. Install msys2
 echo tc. Install Totalcmd [8.51a]
-echo st. Install SourceTree
+echo st. Install SourceTree [1.8.3]
 echo ss. Install Shadowsocks
 echo nc. Install Navicat [9.1.11]
 echo pg. Install PngGauntlet
@@ -120,11 +120,14 @@ call :joinstartmenu %app% %exe% %icon%
 goto menu
 
 :SourceTree
-set app=SourceTree
-set exe=SourceTree\SourceTree.exe
+set app=sourcetree-183
+set exe=sourcetree-183\SourceTree.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
 call :joinstartmenu %app% %exe% %icon%
 goto menu
 
@@ -363,8 +366,8 @@ set _exe=%2
 set _icon=%3
 set shortcut="%fperoot%\%_app%.url"
 echo [InternetShortcut]>%shortcut%
-echo URL="%cd%\%_exe%">>%shortcut%
-echo IconFile=%cd%\%_icon%>>%shortcut%
+echo URL="%fperoot%\%_exe%">>%shortcut%
+echo IconFile=%fperoot%\%_icon%>>%shortcut%
 echo IconIndex=0 >>%shortcut%
 move /Y %shortcut% %start_menu_dir%
 goto :eof
