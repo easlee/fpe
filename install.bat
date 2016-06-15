@@ -12,7 +12,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.4          ----
+echo ----         version  1.0.5          ----
 echo -----------------------------------------
 echo vi. Install Vim [7.4.788]
 echo vc. Install VS Code [1.1]
@@ -40,6 +40,7 @@ echo qt. Install Qt [5.6.0] (x86  msvc2013)
 echo nj. Install NodeJS [4.4.3]
 echo ut. Install Unity [5.2.0]
 echo cc. Install Cocos [3.10]
+echo cmk. Install CMake [3.6.0]
 echo .........................................
 echo update. Update the FPE
 echo -----------------------------------------
@@ -71,6 +72,7 @@ if "%idx%"=="ut" goto Unity
 if "%idx%"=="ut" goto Unity
 if "%idx%"=="cc" goto Cocos
 if "%idx%"=="nj" goto NodeJS
+if "%idx%"=="cmk" goto CMake
 if "%idx%"=="update" goto Update
 goto menu
 
@@ -301,6 +303,15 @@ goto menu
 :NodeJS
 set app=nodejs
 set exe=nodejs\node.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:CMake
+set app=cmake-360
+set exe=cmake-360\bin\cmake-gui.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
