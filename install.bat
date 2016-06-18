@@ -12,7 +12,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.6          ----
+echo ----         version  1.0.7          ----
 echo -----------------------------------------
 echo vi. Install Vim [7.4.788]
 echo vc. Install VS Code [1.1]
@@ -39,6 +39,7 @@ echo adk. Install Android SDK
 echo qt. Install Qt [5.6.0] (x86  msvc2013)
 echo nj. Install NodeJS [4.4.3]
 echo nx. Install Nginx [1.11.1]
+echo cy. Install Caddy [0.8.3]
 echo ut. Install Unity [5.2.0]
 echo cc. Install Cocos [3.10]
 echo cmk. Install CMake [3.6.0]
@@ -73,6 +74,7 @@ if "%idx%"=="ut" goto Unity
 if "%idx%"=="cc" goto Cocos
 if "%idx%"=="nj" goto NodeJS
 if "%idx%"=="nx" goto Nginx
+if "%idx%"=="cy" goto Caddy
 if "%idx%"=="cmk" goto CMake
 if "%idx%"=="update" goto Update
 goto menu
@@ -313,6 +315,15 @@ goto menu
 :Nginx
 set app=nginx-1111
 set exe=nginx-1111\nginx.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:Caddy
+set app=caddy-083
+set exe=caddy-083\caddy.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
