@@ -12,7 +12,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.7          ----
+echo ----         version  1.0.8          ----
 echo -----------------------------------------
 echo vi. Install Vim [7.4.788]
 echo vc. Install VS Code [1.1]
@@ -36,11 +36,11 @@ echo td. Install Thunder [1.0.33.358]
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
-echo qt. Install Qt [5.6.0] (x86  msvc2013)
+echo qt. Install Qt [5.7.0] (x86  msvc2015)
 echo nj. Install NodeJS [4.4.3]
 echo nx. Install Nginx [1.11.1]
 echo cy. Install Caddy [0.8.3]
-echo ut. Install Unity [5.2.0]
+echo ut. Install Unity [5.3.5]
 echo cc. Install Cocos [3.10]
 echo cmk. Install CMake [3.6.0]
 echo .........................................
@@ -274,7 +274,7 @@ call :install_app %app%
 goto menu
 
 :Qt
-set app=qt-msvc2013-x86-560
+set app=qt-msvc2015-x86-570
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
@@ -289,8 +289,8 @@ call :decompress_app %app%
 goto menu
 
 :Unity
-set app=Unity
-set exe=Unity\Editor\Unity.exe
+set app=Unity-535
+set exe=%app%\Editor\Unity.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
