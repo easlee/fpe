@@ -12,36 +12,37 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.8          ----
+echo ----         version  1.0.10         ----
 echo -----------------------------------------
-echo vi. Install Vim [7.4.788]
-echo vc. Install VS Code [1.1]
-echo ms. Install msys
+echo vi.  Install Vim [7.4.788]
+echo vc.  Install VS Code [1.1]
+echo ms.  Install msys
 echo ms2. Install msys2
-echo tc. Install Totalcmd [8.51a]
-echo st. Install SourceTree [1.8.3]
-echo ss. Install Shadowsocks
-echo nc. Install Navicat [9.1.11]
-echo pg. Install PngGauntlet
-echo tp. Install TexturePacker
+echo tc.  Install Totalcmd [8.51a]
+echo st.  Install SourceTree [1.8.3]
+echo ss.  Install Shadowsocks
+echo nc.  Install Navicat [9.1.11]
+echo pg.  Install PngGauntlet
+echo tp.  Install TexturePacker
 echo xsf. Install XShell XFtp [5.0]
-echo is. Install ILSpy 
-echo 3c. Install 360Chrome
-echo wo. Install WPS Office
-echo ps. Install Photoshop [CC]
-echo gv. Install GoldWave [6.21]
-echo xm. Install XMind [7u1]
-echo ax. Install Axure [8.0.0.3297]
-echo td. Install Thunder [1.0.33.358]
+echo is.  Install ILSpy 
+echo 3c.  Install 360Chrome
+echo wo.  Install WPS Office
+echo ps.  Install Photoshop [CC]
+echo gv.  Install GoldWave [6.21]
+echo xm.  Install XMind [7u1]
+echo ax.  Install Axure [8.0.0.3297]
+echo td.  Install Thunder [1.0.33.358]
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
-echo qt. Install Qt [5.7.0] (x86  msvc2015)
-echo nj. Install NodeJS [4.4.3]
-echo nx. Install Nginx [1.11.1]
-echo cy. Install Caddy [0.8.3]
-echo ut. Install Unity [5.3.5]
-echo cc. Install Cocos [3.10]
+echo qt.  Install Qt [5.7.0] (x86  msvc2015)
+echo qtd. Install Qt Docs [5.7.0] (x86  msvc2015)
+echo nj.  Install NodeJS [4.4.3]
+echo nx.  Install Nginx [1.11.1]
+echo cy.  Install Caddy [0.8.3]
+echo ut.  Install Unity [5.3.5]
+echo cc.  Install Cocos [3.10]
 echo cmk. Install CMake [3.6.0]
 echo .........................................
 echo update. Update the FPE
@@ -70,6 +71,7 @@ if "%idx%"=="td" goto Thunder
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="adk" goto AndroidSDK
 if "%idx%"=="qt" goto Qt
+if "%idx%"=="qtd" goto QtDocs
 if "%idx%"=="ut" goto Unity
 if "%idx%"=="cc" goto Cocos
 if "%idx%"=="nj" goto NodeJS
@@ -274,12 +276,18 @@ call :install_app %app%
 goto menu
 
 :Qt
-set app=qt-msvc2015-x86-570
+set app=qt-570-msvc2015-x86
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
 call :decompress_installer %app%
 call :install_app %app%
+goto menu
+
+:QtDocs
+set app=qt-docs-570-msvc2015-x86
+call :download_app %app%
+call :decompress_app %app%
 goto menu
 
 :Cocos
@@ -300,6 +308,8 @@ call :install_app %app%
 call :download_patcher %app%
 call :decompress_patcher %app%
 call :patch_app %app%
+call :download_extra %app%
+call :decompress_extra %app%
 call :joinstartmenu %app% %exe% %icon%
 goto menu
 
@@ -350,21 +360,32 @@ goto menu
 cd %fperoot%
 echo ### download app ...
 set _app=%1
-curl -O %domain%/%_app%.7z
+curl -C - -o %_app%.tmp %domain%/%_app%.7z %_app%.tmp
+move /Y %_app%.tmp %_app%.7z
 goto :eof
 
 :download_installer
 cd %fperoot%
 echo ### download installer ...
 set _app=%1
-curl -O %domain%/%_app%_installer.7z
+curl -C - -o %_app%_installer.tmp %domain%/%_app%_installer.7z
+move /Y %_app%_installer.tmp %_app%_installer.7z
 goto :eof
 
 :download_patcher
 cd %fperoot%
 echo ### download patcher ...
 set _app=%1
-curl -O %domain%/%_app%_patcher.7z
+curl -C - -o %_app%_patcher.tmp %domain%/%_app%_patcher.7z
+move /Y %_app%_patcher.tmp %_app%_patcher.7z
+goto :eof
+
+:download_extra
+cd %fperoot%
+echo ### download extra ...
+set _app=%1
+curl -C - -o %_app%_extra.tmp %domain%/%_app%_extra.7z
+move /Y %_app%_extra.tmp %_app%_extra.7z
 goto :eof
 
 :decompress_app
@@ -390,6 +411,14 @@ echo ### decompress patcher ...
 set _app=%1
 7za -y x %_app%_patcher.7z
 del %_app%_patcher.7z
+goto :eof
+
+:decompress_extra
+cd %fperoot%
+echo ### decompress extra ...
+set _app=%1
+7za -y x %_app%_extra.7z
+del %_app%_extra.7z
 goto :eof
 
 :joinstartmenu
