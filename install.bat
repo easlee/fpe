@@ -12,12 +12,11 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.10         ----
+echo ----         version  1.0.12         ----
 echo -----------------------------------------
 echo vi.  Install Vim [7.4.788]
 echo vc.  Install VS Code [1.1]
-echo ms.  Install msys
-echo ms2. Install msys2
+echo ms.  Install msys2
 echo tc.  Install Totalcmd [8.51a]
 echo st.  Install SourceTree [1.8.3]
 echo ss.  Install Shadowsocks
@@ -29,6 +28,7 @@ echo is.  Install ILSpy
 echo 3c.  Install 360Chrome
 echo wo.  Install WPS Office
 echo ps.  Install Photoshop [CC]
+echo gm.  Install GIMP [2.8.16-4]
 echo gv.  Install GoldWave [6.21]
 echo xm.  Install XMind [7u1]
 echo ax.  Install Axure [8.0.0.3297]
@@ -51,7 +51,6 @@ set idx="0"
 set /p idx=Enter the index:
 if "%idx%"=="vi" goto Vim
 if "%idx%"=="vc" goto VSCode
-if "%idx%"=="ms" goto msys
 if "%idx%"=="ms2" goto msys2
 if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
@@ -64,6 +63,7 @@ if "%idx%"=="xsf" goto XshellXftp
 if "%idx%"=="3c" goto 360Chrome
 if "%idx%"=="wo" goto WPSOffice
 if "%idx%"=="ps" goto Photoshop
+if "%idx%"=="gm" goto GIMP
 if "%idx%"=="gv" goto GoldWave
 if "%idx%"=="xm" goto XMind
 if "%idx%"=="ax" goto Axure
@@ -210,14 +210,20 @@ call :joinstartmenu WPSExcel WPSOffice\9.1.0.5113\office6\et.exe WPSOffice\9.1.0
 goto menu
 
 :Photoshop
-set app=Photoshop
-set exe=Photoshop\Photoshop\Photoshop.exe
+set app=PhotoshopCC
+set exe=PhotoshopCC\Photoshop64Portable.exe
 set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :download_installer %app%
-call :decompress_installer %app%
-call :install_app %app%
+call :joinstartmenu %app% %exe% %icon%
+goto menu
+
+:GIMP
+set app=GIMP-28164
+set exe=GIMP-28164\GIMPPortable.exe
+set icon=%exe%
+call :download_app %app%
+call :decompress_app %app%
 call :joinstartmenu %app% %exe% %icon%
 goto menu
 
