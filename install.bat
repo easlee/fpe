@@ -12,7 +12,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.12         ----
+echo ----         version  1.0.13         ----
 echo -----------------------------------------
 echo vi.  Install Vim [7.4.788]
 echo vc.  Install VS Code [1.1]
@@ -288,6 +288,8 @@ call :decompress_app %app%
 call :download_installer %app%
 call :decompress_installer %app%
 call :install_app %app%
+call :download_extra %app%
+call :decompress_extra %app%
 goto menu
 
 :QtDocs
