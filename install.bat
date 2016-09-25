@@ -1,5 +1,4 @@
 @echo off
-
 set domain=http://7xlxpn.dl1.z0.glb.clouddn.com
 set fperoot=%cd%
 set start_menu_dir="%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\fpe"
@@ -12,27 +11,30 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.0.13         ----
+echo ----         version  1.1.0          ----
 echo -----------------------------------------
+echo 3c.  Install 360Chrome
+echo mo.  Install Microsoft Office [2016 x64]
+echo ap.  Install Adobe Photoshop [CC]
+echo ss.  Install Shadowsocks
+echo td.  Install Thunder [1.0.33.358]
+echo .........................................
+echo xm.  Install XMind [7u1]
+echo aa.  Install Adobe Audition [CC]
+echo ax.  Install Axure [8.0.0.3297]
+echo gv.  Install GoldWave [6.21]
+echo .........................................
 echo vi.  Install Vim [7.4.788]
 echo vc.  Install VS Code [1.1]
 echo ms.  Install msys2
 echo tc.  Install Totalcmd [8.51a]
 echo st.  Install SourceTree [1.8.3]
-echo ss.  Install Shadowsocks
+echo .........................................
 echo nc.  Install Navicat [9.1.11]
 echo pg.  Install PngGauntlet
 echo tp.  Install TexturePacker
 echo xsf. Install XShell XFtp [5.0]
-echo is.  Install ILSpy 
-echo 3c.  Install 360Chrome
-echo wo.  Install WPS Office
-echo ps.  Install Photoshop [CC]
-echo gm.  Install GIMP [2.8.16-4]
-echo gv.  Install GoldWave [6.21]
-echo xm.  Install XMind [7u1]
-echo ax.  Install Axure [8.0.0.3297]
-echo td.  Install Thunder [1.0.33.358]
+echo is.  Install ILSpy
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK
@@ -49,6 +51,12 @@ echo update. Update the FPE
 echo -----------------------------------------
 set idx="0"
 set /p idx=Enter the index:
+if "%idx%"=="3c" goto 360Chrome
+if "%idx%"=="mo" goto MicrosoftOffice
+if "%idx%"=="mv" goto MicrosoftVisio
+if "%idx%"=="mp" goto MicrosoftProject
+if "%idx%"=="ap" goto AdobePhotoshop
+if "%idx%"=="aa" goto AdobeAudition
 if "%idx%"=="vi" goto Vim
 if "%idx%"=="vc" goto VSCode
 if "%idx%"=="ms2" goto msys2
@@ -60,10 +68,6 @@ if "%idx%"=="nc" goto Navicat
 if "%idx%"=="pg" goto PngGauntlet
 if "%idx%"=="tp" goto TexturePacker
 if "%idx%"=="xsf" goto XshellXftp
-if "%idx%"=="3c" goto 360Chrome
-if "%idx%"=="wo" goto WPSOffice
-if "%idx%"=="ps" goto Photoshop
-if "%idx%"=="gm" goto GIMP
 if "%idx%"=="gv" goto GoldWave
 if "%idx%"=="xm" goto XMind
 if "%idx%"=="ax" goto Axure
@@ -81,186 +85,191 @@ if "%idx%"=="cmk" goto CMake
 if "%idx%"=="update" goto Update
 goto menu
 
+:MicrosoftOffice
+set app=MicrosoftOffice2016X64
+call :download_app %app%
+call :decompress_app %app%
+set exeWord=MicrosoftOffice2016X64\Office16\WINWORD.exe
+call :createshortcut Word %exeWord%
+set exeExcel=MicrosoftOffice2016X64\Office16\EXCEL.exe
+call :createshortcut Excel %exeExcel%
+set exePowerPoint=MicrosoftOffice2016X64\Office16\POWERPNT.exe
+call :createshortcut PowerPoint %exeExcel%
+set exeVisio=MicrosoftOffice2016X64\Office16\VISIO.exe
+call :createshortcut Visio %exeVisio%
+set exeProject=MicrosoftOffice2016X64\Office16\WINPROJ.exe
+call :createshortcut Project %exeProject%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+call :deleteshortcut "Microsoft Word 2016"
+call :deleteshortcut "Microsoft Excel 2016"
+call :deleteshortcut "Microsoft PowerPoint 2016"
+goto menu
+
+:AdobePhotoshop
+set app=AdobePhotoshopCC
+set exe=AdobePhotoshopCC\Photoshop.exe
+call :download_app %app%
+call :decompress_app %app%
+call :deleteshortcut "Adobe Photoshop CC"
+call :createshortcut %app% %exe%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+call :deleteshortcut "Adobe Photoshop CC"
+goto menu
+
+:AdobeAudition
+set app=AdobeAuditionCC
+set exe=AdobeAuditionCC\Audition.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+goto menu
+
 :Vim
 set app=Vim
 set exe=Vim\vim74\gvim.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :VSCode
 set app=VSCode
 set exe=VSCode\code.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :msys
 set app=msys
 set exe=msys\msys.bat
-set icon=msys\msys.ico
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :msys2
 set app=msys2
 set exe=msys2\msys2_shell.bat
-set icon=msys2\msys2.ico
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Totalcmd
 set app=totalcmd
 set exe=totalcmd\TOTALCMD64.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :SourceTree
 set app=sourcetree-183
 set exe=sourcetree-183\SourceTree.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
 call :decompress_installer %app%
 call :install_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Shadowsocks
 set app=Shadowsocks
 set exe=Shadowsocks\Shadowsocks.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :ILSpy
 set app=ILSpy
 set exe=ILSpy\ILSpy.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Navicat
 set app=Navicat
 set exe=Navicat\navicat.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :PngGauntlet
 set app=PngGauntlet
 set exe=PngGauntlet\PngGauntlet.exe
-set icon=PngGauntlet\PngGauntlet.ico
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :TexturePacker
 set app=TexturePacker
 set exe=TexturePacker\bin\TexturePackerGUI.exe
-set icon=TexturePacker\resources\icons\Icon.ico
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :XshellXftp
 set app=XshellXftp
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu XShell XshellXftp\XshellPortable.exe XshellXftp\XshellPortable.exe
-call :joinstartmenu XFtp XshellXftp\XftpPortable.exe XshellXftp\XftpPortable.exe
+call :createshortcut XShell XshellXftp\XshellPortable.exe
+call :createshortcut XFtp XshellXftp\XftpPortable.exe
 goto menu
 
 :360Chrome
 set app=360Chrome
 set exe=360Chrome\Chrome\Application\360chrome.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
-:WPSOffice
-set app=WPSOffice
-call :download_app %app%
-call :decompress_app %app%
-call :joinstartmenu WPSWord WPSOffice\9.1.0.5113\office6\wps.exe WPSOffice\9.1.0.5113\office6\wps.exe
-call :joinstartmenu WPSPPT WPSOffice\9.1.0.5113\office6\wpp.exe WPSOffice\9.1.0.5113\office6\wpp.exe
-call :joinstartmenu WPSExcel WPSOffice\9.1.0.5113\office6\et.exe WPSOffice\9.1.0.5113\office6\et.exe
-goto menu
 
-:Photoshop
-set app=PhotoshopCC
-set exe=PhotoshopCC\Photoshop64Portable.exe
-set icon=%exe%
-call :download_app %app%
-call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
-goto menu
-
-:GIMP
-set app=GIMP-28164
-set exe=GIMP-28164\GIMPPortable.exe
-set icon=%exe%
-call :download_app %app%
-call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
-goto menu
 
 :GoldWave
 set app=GoldWave
 set exe=GoldWave\GoldWave.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :XMind
 set app=XMind
 set exe=XMind\XMind.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Axure
 set app=Axure
 set exe=Axure\AxureRP8.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Thunder
 set app=Thunder
 set exe=Thunder\Program\Thunder.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :JavaSDK
@@ -307,7 +316,6 @@ goto menu
 :Unity
 set app=Unity-535
 set exe=%app%\Editor\Unity.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
@@ -318,43 +326,39 @@ call :decompress_patcher %app%
 call :patch_app %app%
 call :download_extra %app%
 call :decompress_extra %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :NodeJS
 set app=nodejs
 set exe=nodejs\node.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Nginx
 set app=nginx-1111
 set exe=nginx-1111\nginx.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Caddy
 set app=caddy-083
 set exe=caddy-083\caddy.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :CMake
 set app=cmake-360
 set exe=cmake-360\bin\cmake-gui.exe
-set icon=%exe%
 call :download_app %app%
 call :decompress_app %app%
-call :joinstartmenu %app% %exe% %icon%
+call :createshortcut %app% %exe%
 goto menu
 
 :Update
@@ -429,16 +433,19 @@ set _app=%1
 del %_app%_extra.7z
 goto :eof
 
-:joinstartmenu
+:deleteshortcut
+set _app=%~1
+IF EXIST "%UserProfile%\Desktop\%_app%.lnk" DEL /Q "%UserProfile%\Desktop\%_app%.lnk"
+IF EXIST "%AllUsersProfile%\Microsoft\Windows\Start Menu\Programs\%_app%.lnk" DEL /Q "%AllUsersProfile%\Microsoft\Windows\Start Menu\Programs\%_app%.lnk"
+goto :eof
+
+:createshortcut
 set _app=%1
 set _exe=%2
-set _icon=%3
-set shortcut="%fperoot%\%_app%.url"
-echo [InternetShortcut]>%shortcut%
-echo URL="%fperoot%\%_exe%">>%shortcut%
-echo IconFile=%fperoot%\%_icon%>>%shortcut%
-echo IconIndex=0 >>%shortcut%
-move /Y %shortcut% %start_menu_dir%
+set URL="%fperoot%\%_exe%"
+IF EXIST %URL% Shortcut.exe /F:"%UserProfile%\Desktop\%_app%.lnk" /A:C /T:%URL%>NUL
+echo %start_menu_dir%
+IF EXIST %URL% Shortcut.exe /F:%start_menu_dir%\%_app%.lnk /A:C /T:%URL%>nul
 goto :eof
 
 :install_app
