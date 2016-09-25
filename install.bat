@@ -444,7 +444,6 @@ set _app=%1
 set _exe=%2
 set URL="%fperoot%\%_exe%"
 IF EXIST %URL% Shortcut.exe /F:"%UserProfile%\Desktop\%_app%.lnk" /A:C /T:%URL%>NUL
-echo %start_menu_dir%
 IF EXIST %URL% Shortcut.exe /F:%start_menu_dir%\%_app%.lnk /A:C /T:%URL%>nul
 goto :eof
 
