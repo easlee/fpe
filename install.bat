@@ -94,7 +94,7 @@ call :createshortcut Word %exeWord%
 set exeExcel=MicrosoftOffice2016X64\Office16\EXCEL.exe
 call :createshortcut Excel %exeExcel%
 set exePowerPoint=MicrosoftOffice2016X64\Office16\POWERPNT.exe
-call :createshortcut PowerPoint %exeExcel%
+call :createshortcut PowerPoint %exePowerPoint%
 set exeVisio=MicrosoftOffice2016X64\Office16\VISIO.exe
 call :createshortcut Visio %exeVisio%
 set exeProject=MicrosoftOffice2016X64\Office16\WINPROJ.exe
