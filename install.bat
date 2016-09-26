@@ -11,7 +11,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.1.0          ----
+echo ----         version  1.1.2          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
@@ -37,14 +37,13 @@ echo xsf. Install XShell XFtp [5.0]
 echo is.  Install ILSpy
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
-echo adk. Install Android SDK
+echo adk. Install Android SDK [r24.4.1]
 echo qt.  Install Qt [5.7.0] (x86  msvc2015)
 echo qtd. Install Qt Docs [5.7.0] (x86  msvc2015)
 echo nj.  Install NodeJS [4.4.3]
 echo nx.  Install Nginx [1.11.1]
 echo cy.  Install Caddy [0.8.3]
 echo ut.  Install Unity [5.3.5]
-echo cc.  Install Cocos [3.10]
 echo cmk. Install CMake [3.6.0]
 echo .........................................
 echo update. Update the FPE
@@ -59,7 +58,7 @@ if "%idx%"=="ap" goto AdobePhotoshop
 if "%idx%"=="aa" goto AdobeAudition
 if "%idx%"=="vi" goto Vim
 if "%idx%"=="vc" goto VSCode
-if "%idx%"=="ms2" goto msys2
+if "%idx%"=="ms" goto msys2
 if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
 if "%idx%"=="ss" goto Shadowsocks
@@ -238,8 +237,6 @@ call :decompress_app %app%
 call :createshortcut %app% %exe%
 goto menu
 
-
-
 :GoldWave
 set app=GoldWave
 set exe=GoldWave\GoldWave.exe
@@ -303,12 +300,6 @@ goto menu
 
 :QtDocs
 set app=qt-docs-570-msvc2015-x86
-call :download_app %app%
-call :decompress_app %app%
-goto menu
-
-:Cocos
-set app=Cocos
 call :download_app %app%
 call :decompress_app %app%
 goto menu
