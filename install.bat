@@ -11,7 +11,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.1.2          ----
+echo ----         version  1.2.0          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
@@ -29,6 +29,8 @@ echo vc.  Install VS Code [1.1]
 echo ms.  Install msys2
 echo tc.  Install Totalcmd [8.51a]
 echo st.  Install SourceTree [1.8.3]
+echo ln.  Install LeaNote
+echo oc.  Install OwnCloud
 echo .........................................
 echo nc.  Install Navicat [9.1.11]
 echo pg.  Install PngGauntlet
@@ -37,13 +39,13 @@ echo xsf. Install XShell XFtp [5.0]
 echo is.  Install ILSpy
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
-echo adk. Install Android SDK [r24.4.1]
+echo adk. Install Android SDK [r25]
 echo qt.  Install Qt [5.7.0] (x86  msvc2015)
 echo qtd. Install Qt Docs [5.7.0] (x86  msvc2015)
 echo nj.  Install NodeJS [4.4.3]
 echo nx.  Install Nginx [1.11.1]
 echo cy.  Install Caddy [0.8.3]
-echo ut.  Install Unity [5.3.5]
+echo ut.  Install Unity [5.3.7]
 echo cmk. Install CMake [3.6.0]
 echo .........................................
 echo update. Update the FPE
@@ -63,6 +65,8 @@ if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
 if "%idx%"=="ss" goto Shadowsocks
 if "%idx%"=="is" goto ILSpy
+if "%idx%"=="ln" goto LeaNote
+if "%idx%"=="oc" goto OwnCloud
 if "%idx%"=="nc" goto Navicat
 if "%idx%"=="pg" goto PngGauntlet
 if "%idx%"=="tp" goto TexturePacker
@@ -181,6 +185,23 @@ call :install_app %app%
 call :createshortcut %app% %exe%
 goto menu
 
+:LeaNote
+set app=leanote
+set exe=leanote\leanote.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
+:OwnCloud
+set app=ownCloud
+set exe=ownCloud\owncloud.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
+
 :Shadowsocks
 set app=Shadowsocks
 set exe=Shadowsocks\Shadowsocks.exe
@@ -279,7 +300,7 @@ call :install_app %app%
 goto menu
 
 :AndroidSDK
-set app=android-sdk
+set app=android-sdk-r25
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
@@ -305,7 +326,7 @@ call :decompress_app %app%
 goto menu
 
 :Unity
-set app=Unity-535
+set app=Unity-537
 set exe=%app%\Editor\Unity.exe
 call :download_app %app%
 call :decompress_app %app%
