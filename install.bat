@@ -11,13 +11,13 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.2.0          ----
+echo ----         version  1.2.3          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
 echo ap.  Install Adobe Photoshop [CC]
 echo ss.  Install Shadowsocks
-echo td.  Install Thunder [1.0.33.358]
+echo td.  Install Thunder [1.0.35.366]
 echo .........................................
 echo xm.  Install XMind [7u1]
 echo aa.  Install Adobe Audition [CC]
@@ -31,17 +31,17 @@ echo tc.  Install Totalcmd [8.51a]
 echo st.  Install SourceTree [1.8.3]
 echo ln.  Install LeaNote
 echo oc.  Install OwnCloud
+echo sis. Install NSIS [3.0.1]
 echo .........................................
 echo nc.  Install Navicat [9.1.11]
 echo pg.  Install PngGauntlet
 echo tp.  Install TexturePacker
 echo xsf. Install XShell XFtp [5.0]
-echo is.  Install ILSpy
+echo spy. Install ILSpy
 echo .........................................
 echo jdk. Install Java SDK [1.7.0_80]
 echo adk. Install Android SDK [r25]
-echo qt.  Install Qt [5.7.0] (x86  msvc2015)
-echo qtd. Install Qt Docs [5.7.0] (x86  msvc2015)
+echo qt.  Install Qt [5.8.0] (x86  msvc2015)
 echo nj.  Install NodeJS [4.4.3]
 echo nx.  Install Nginx [1.11.1]
 echo cy.  Install Caddy [0.8.3]
@@ -64,9 +64,10 @@ if "%idx%"=="ms" goto msys2
 if "%idx%"=="tc" goto Totalcmd
 if "%idx%"=="st" goto SourceTree
 if "%idx%"=="ss" goto Shadowsocks
-if "%idx%"=="is" goto ILSpy
+if "%idx%"=="spy" goto ILSpy
 if "%idx%"=="ln" goto LeaNote
 if "%idx%"=="oc" goto OwnCloud
+if "%idx%"=="sis" goto NSIS
 if "%idx%"=="nc" goto Navicat
 if "%idx%"=="pg" goto PngGauntlet
 if "%idx%"=="tp" goto TexturePacker
@@ -201,6 +202,14 @@ call :decompress_app %app%
 call :createshortcut %app% %exe%
 goto menu
 
+:NSIS
+set app=NSIS-301
+set exe=NSIS-301\NSIS.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
 
 :Shadowsocks
 set app=Shadowsocks
@@ -309,7 +318,7 @@ call :install_app %app%
 goto menu
 
 :Qt
-set app=qt-570-msvc2015-x86
+set app=qt-580-msvc2015-x86
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
@@ -317,12 +326,6 @@ call :decompress_installer %app%
 call :install_app %app%
 call :download_extra %app%
 call :decompress_extra %app%
-goto menu
-
-:QtDocs
-set app=qt-docs-570-msvc2015-x86
-call :download_app %app%
-call :decompress_app %app%
 goto menu
 
 :Unity
