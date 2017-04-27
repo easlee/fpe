@@ -11,7 +11,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.2.3          ----
+echo ----         version  1.2.5          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
@@ -39,13 +39,13 @@ echo tp.  Install TexturePacker
 echo xsf. Install XShell XFtp [5.0]
 echo spy. Install ILSpy
 echo .........................................
-echo jdk. Install Java SDK [1.7.0_80]
+echo jdk. Install Java SDK [8u121]
 echo adk. Install Android SDK [r25]
 echo qt.  Install Qt [5.8.0] (x86  msvc2015)
 echo nj.  Install NodeJS [4.4.3]
 echo nx.  Install Nginx [1.11.1]
 echo cy.  Install Caddy [0.8.3]
-echo ut.  Install Unity [5.3.7]
+echo ut.  Install Unity [5.6.0]
 echo cmk. Install CMake [3.6.0]
 echo .........................................
 echo update. Update the FPE
@@ -329,7 +329,7 @@ call :decompress_extra %app%
 goto menu
 
 :Unity
-set app=Unity-537
+set app=Unity-560
 set exe=%app%\Editor\Unity.exe
 call :download_app %app%
 call :decompress_app %app%
