@@ -18,6 +18,7 @@ echo mo.  Install Microsoft Office [2016 x64]
 echo ap.  Install Adobe Photoshop [CC]
 echo ss.  Install Shadowsocks
 echo td.  Install Thunder [1.0.35.366]
+echo kmp. Install KMPlayer [3.6]
 echo .........................................
 echo xm.  Install XMind [7u1]
 echo aa.  Install Adobe Audition [CC]
@@ -58,6 +59,7 @@ if "%idx%"=="mv" goto MicrosoftVisio
 if "%idx%"=="mp" goto MicrosoftProject
 if "%idx%"=="ap" goto AdobePhotoshop
 if "%idx%"=="aa" goto AdobeAudition
+if "%idx%"=="kmp" goto KMPlayer
 if "%idx%"=="vi" goto Vim
 if "%idx%"=="vc" goto VSCode
 if "%idx%"=="ms" goto msys2
@@ -138,6 +140,14 @@ goto menu
 :Vim
 set app=Vim
 set exe=Vim\vim74\gvim.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
+:KMPlayer
+set app=KMPlayer3
+set exe=KMPlayer3\KMPlayer.exe
 call :download_app %app%
 call :decompress_app %app%
 call :createshortcut %app% %exe%
