@@ -11,7 +11,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.2.5          ----
+echo ----         version  1.2.6          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
