@@ -11,7 +11,7 @@ cd %fperoot%
 cls
 echo -----------------------------------------
 echo ----        Fangs Portable Env       ----
-echo ----         version  1.2.6          ----
+echo ----         version  1.2.9          ----
 echo -----------------------------------------
 echo 3c.  Install 360Chrome
 echo mo.  Install Microsoft Office [2016 x64]
@@ -29,12 +29,13 @@ echo vi.  Install Vim [7.4.788]
 echo vc.  Install VS Code [1.1]
 echo ms.  Install msys2
 echo tc.  Install Totalcmd [8.51a]
-echo st.  Install SourceTree [1.8.3]
+echo st.  Install SourceTree [2.4.7]
 echo ln.  Install LeaNote
 echo oc.  Install OwnCloud
 echo sis. Install NSIS [3.0.1]
 echo .........................................
 echo nc.  Install Navicat [9.1.11]
+echo rt.  Install Robo3T [1.1.1]
 echo pg.  Install PngGauntlet
 echo tp.  Install TexturePacker
 echo xsf. Install XShell XFtp [5.0]
@@ -42,7 +43,9 @@ echo spy. Install ILSpy
 echo .........................................
 echo jdk. Install Java SDK [8u121]
 echo adk. Install Android SDK [r25]
-echo qt.  Install Qt [5.8.0] (x86  msvc2015)
+echo ndk. Install Android NDK [r15c]
+echo asd. Install Android Studio [r25]
+echo qt.  Install Qt [5.9.1] (mingw53_32 android_armv7)
 echo nj.  Install NodeJS [4.4.3]
 echo nx.  Install Nginx [1.11.1]
 echo cy.  Install Caddy [0.8.3]
@@ -71,6 +74,7 @@ if "%idx%"=="ln" goto LeaNote
 if "%idx%"=="oc" goto OwnCloud
 if "%idx%"=="sis" goto NSIS
 if "%idx%"=="nc" goto Navicat
+if "%idx%"=="rt" goto Robo3T
 if "%idx%"=="pg" goto PngGauntlet
 if "%idx%"=="tp" goto TexturePacker
 if "%idx%"=="xsf" goto XshellXftp
@@ -80,8 +84,9 @@ if "%idx%"=="ax" goto Axure
 if "%idx%"=="td" goto Thunder
 if "%idx%"=="jdk" goto JavaSDK
 if "%idx%"=="adk" goto AndroidSDK
+if "%idx%"=="ndk" goto AndroidNDK
+if "%idx%"=="asd" goto AndroidStudio
 if "%idx%"=="qt" goto Qt
-if "%idx%"=="qtd" goto QtDocs
 if "%idx%"=="ut" goto Unity
 if "%idx%"=="cc" goto Cocos
 if "%idx%"=="nj" goto NodeJS
@@ -186,8 +191,8 @@ call :createshortcut %app% %exe%
 goto menu
 
 :SourceTree
-set app=sourcetree-183
-set exe=sourcetree-183\SourceTree.exe
+set app=SourceTree-247
+set exe=SourceTree-247\SourceTree.exe
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
@@ -240,6 +245,14 @@ goto menu
 :Navicat
 set app=Navicat
 set exe=Navicat\navicat.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
+:Robo3T
+set app=robo3t
+set exe=robo3t\robo3t.exe
 call :download_app %app%
 call :decompress_app %app%
 call :createshortcut %app% %exe%
@@ -318,6 +331,15 @@ call :decompress_installer %app%
 call :install_app %app%
 goto menu
 
+:AndroidNDK
+set app=android-ndk-r15c
+call :download_app %app%
+call :decompress_app %app%
+call :download_installer %app%
+call :decompress_installer %app%
+call :install_app %app%
+goto menu
+
 :AndroidSDK
 set app=android-sdk-r25
 call :download_app %app%
@@ -327,8 +349,17 @@ call :decompress_installer %app%
 call :install_app %app%
 goto menu
 
+
+:AndroidStudio
+set app=android-studio
+set exe=android-studio\bin\studio64.exe
+call :download_app %app%
+call :decompress_app %app%
+call :createshortcut %app% %exe%
+goto menu
+
 :Qt
-set app=qt-580-msvc2015-x86
+set app=qt-591
 call :download_app %app%
 call :decompress_app %app%
 call :download_installer %app%
